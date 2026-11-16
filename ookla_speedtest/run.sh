@@ -106,8 +106,21 @@ listen_stdin() {
   done
 }
 
+# Tijdzone van Home Assistant overnemen, zodat de geplande tijden lokale tijd zijn.
+set_timezone() {
+  local tz
+  tz=$(curl -fsS -H "Authorization: Bearer ${SUPERVISOR_TOKEN:-}" "${HA_API}/config" 2>/dev/null | jq -r '.time_zone // empty')
+  if [ -n "$tz" ] && [ -e "/usr/share/zoneinfo/$tz" ]; then
+    export TZ="$tz"
+    log "Tijdzone: $tz"
+  else
+    log "Tijdzone niet opgehaald; gebruik ${TZ:-UTC}"
+  fi
+}
+
 main() {
   mkdir -p "$DATA_DIR"
+  set_timezone
   log "Ookla Speedtest app gestart. Tijden: $(opt '.schedule | join(", ")')"
   [ "$(opt '.accept_ookla_license')" = "true" ] || \
     log "LET OP: zet accept_ookla_license op true om de Ookla-licentie te accepteren en tests te laten draaien."
