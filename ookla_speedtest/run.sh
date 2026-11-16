@@ -109,7 +109,11 @@ listen_stdin() {
 # Tijdzone van Home Assistant overnemen, zodat de geplande tijden lokale tijd zijn.
 set_timezone() {
   local tz
-  tz=$(curl -fsS -H "Authorization: Bearer ${SUPERVISOR_TOKEN:-}" "${HA_API}/config" 2>/dev/null | jq -r '.time_zone // empty')
+  tz=$(curl -fsS -H "Authorization: Bearer ${SUPERVISOR_TOKEN:-}" "http://supervisor/info" 2>/tmp/tz.err | jq -r '.data.timezone // empty')
+  if [ -z "$tz" ]; then
+    tz=$(curl -fsS -H "Authorization: Bearer ${SUPERVISOR_TOKEN:-}" "${HA_API}/config" 2>>/tmp/tz.err | jq -r '.time_zone // empty')
+  fi
+  [ -z "$tz" ] && log "Tijdzone ophalen mislukt: $(tr '\n' ' ' </tmp/tz.err | cut -c1-200)"
   if [ -n "$tz" ] && [ -e "/usr/share/zoneinfo/$tz" ]; then
     export TZ="$tz"
     log "Tijdzone: $tz"

@@ -1,5 +1,5 @@
 name: Ookla Speedtest
-version: "1.0.2"
+version: "1.0.3"
 slug: ookla_speedtest
 description: Betrouwbare internet-speedtest met de officiële Ookla Speedtest CLI
 url: https://github.com/PStraver/ha-ookla-speedtest
@@ -10,6 +10,7 @@ init: false
 startup: application
 boot: auto
 homeassistant_api: true
+hassio_api: true
 stdin: true
 options:
   accept_ookla_license: false
