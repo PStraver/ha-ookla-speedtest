@@ -2,7 +2,7 @@ name: Ookla Speedtest
 version: "1.0.0"
 slug: ookla_speedtest
 description: Betrouwbare internet-speedtest met de officiële Ookla Speedtest CLI
-url: https://github.com/OWNER/ha-ookla-speedtest
+url: https://github.com/PStraver/ha-ookla-speedtest
 arch:
   - aarch64
   - amd64
