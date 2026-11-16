@@ -131,7 +131,8 @@ main() {
   publish
   [ "$(opt '.run_on_start')" = "true" ] && run_test
 
-  listen_stdin &
+  # Expliciet stdin doorgeven: zonder dit krijgt een achtergrondproces /dev/null.
+  listen_stdin 0<&0 &
 
   local last_run="" last_pub now_hm now_key
   last_pub=$(date +%s)

@@ -1,5 +1,5 @@
 name: Ookla Speedtest
-version: "1.0.4"
+version: "1.0.5"
 slug: ookla_speedtest
 description: Betrouwbare internet-speedtest met de officiële Ookla Speedtest CLI
 url: https://github.com/PStraver/ha-ookla-speedtest
