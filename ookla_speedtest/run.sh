@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/usr/bin/with-contenv bash
 # Ookla Speedtest app voor Home Assistant.
 # Draait de officiële Ookla CLI op vaste tijden (of op verzoek via
 # hassio.addon_stdin met input "run") en zet de resultaten als sensoren in HA.
