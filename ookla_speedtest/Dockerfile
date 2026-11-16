@@ -4,7 +4,7 @@ FROM ${BUILD_FROM}
 ARG BUILD_ARCH
 ARG OOKLA_VERSION=1.2.0
 
-RUN apk add --no-cache jq curl \
+RUN apk add --no-cache jq curl tzdata \
     && case "${BUILD_ARCH}" in \
          aarch64) OOKLA_ARCH=aarch64 ;; \
          amd64) OOKLA_ARCH=x86_64 ;; \
